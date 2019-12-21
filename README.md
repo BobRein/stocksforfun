@@ -1,0 +1,2 @@
+# stocksforfun
+Stock trading simulator.
