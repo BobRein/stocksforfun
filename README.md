@@ -1,2 +1,2 @@
 # stocksforfun
-Stock trading simulator.
+Stock trading simulator. Make an account and trade stocks for fun.
