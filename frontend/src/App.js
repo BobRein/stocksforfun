@@ -8,15 +8,15 @@ function App() {
     <div>
         {/* Headers */}
         <Header/>
+        <div style={{paddingTop: '60px'}}>
+          <Switch>
+            <Route path="/research" exact render = {(props) => <Research {...props}/>}/>
 
-        <Switch>
-          <Route path="/research" exact render = {(props) => <Research {...props}/>}/>
-
-          
-          {/* Must BE LAST it matches with all routes */}
-          <Route path="/" exact render = {(props) => <Home {...props}/>}/>
-        </Switch>
-
+            
+            {/* Must BE LAST it matches with all routes */}
+            <Route path="/" exact render = {(props) => <Home {...props}/>}/>
+          </Switch>
+        </div>
       </div>
   );
 }
