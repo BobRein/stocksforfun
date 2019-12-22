@@ -1,16 +1,23 @@
 import React from 'react';
-
-import { getTicker } from './axios/stockCalls.js';
+import Header from './components/header';
+import Home from './pages/home';
+import Research from './pages/research';
+import {Switch, Route} from 'react-router-dom';
 function App() {
-  getTicker().then((response) => {
-    console.log(response.data.symbol + ': ' + response.data.price);
-}).catch((error) => {
-    console.log('Stock error',error.response);
-});
   return (
-    <div className="App">
-      testing. check console
-    </div>
+    <div>
+        {/* Headers */}
+        <Header/>
+
+        <Switch>
+          <Route path="/research" exact render = {(props) => <Research {...props}/>}/>
+
+          
+          {/* Must BE LAST it matches with all routes */}
+          <Route path="/" exact render = {(props) => <Home {...props}/>}/>
+        </Switch>
+
+      </div>
   );
 }
 
