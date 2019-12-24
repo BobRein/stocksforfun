@@ -2,6 +2,7 @@ import {TextField, Typography } from '@material-ui/core';
 import React from 'react';
 import { getStockInfo } from '../axios/stockCalls.js';
 import Stock from './stock.js';
+import StockSnapshot from './stockSnapshot.js';
 
 
 class Lookup extends React.Component {
@@ -10,6 +11,7 @@ class Lookup extends React.Component {
         super(props);
         this.state = {
             stockError: '',
+            stockInfo: {},
             timeout: null
         }
     }
@@ -21,21 +23,18 @@ class Lookup extends React.Component {
             getStockInfo(ticker).then((response) => {
                 if (response.data.symbol == undefined){
                     this.setState({ stockError: ticker.toUpperCase() + ' is not available.' });
-                    this.setState({ name: '' });
-                    this.setState({ price: '' });
                 }else{
                     this.setState({ stockError: '' });
-                    this.setState({ name: response.data.profile.companyName });
-                    this.setState({ price: response.data.profile.price });
+                    this.setState({ stockInfo: response.data});
                 }
             }).catch((error) => {
                 console.log('Stock error for ',ticker,' ',error.response);
                 this.setState({ stockError: 'Server issue, sorry for the inconvience.' })
             });
-        }, 1000);
-    }else{
-        this.setState({ stockError: '' });
-    }
+        }, 750);
+        }else{
+            this.setState({ stockError: '' });
+        }
     }
     render() {
         let style = {
@@ -52,8 +51,7 @@ class Lookup extends React.Component {
                 onChange ={(e) => this.handleStockChange(e)}/>
            
             <div >
-            {this.state.name} $ {this.state.price}
-            <Stock ></Stock>
+            <StockSnapshot stockInfo = {this.state.stockInfo}></StockSnapshot>
             </div>
         </div>
         );
