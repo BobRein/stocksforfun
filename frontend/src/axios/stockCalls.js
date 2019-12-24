@@ -6,3 +6,7 @@ export function getPrice(ticker){
 export function getStockInfo(ticker){
     return axios.get(`https://financialmodelingprep.com/api/v3/company/profile/`+ticker)
 }
+
+export function getPreviousDay(ticker){
+    return axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/`+ ticker + `?timeseries=1`)
+}
