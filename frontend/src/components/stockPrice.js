@@ -15,6 +15,7 @@ class StockPrice extends React.Component {
         };
     }
     updateAll(ticker){
+        this.state.ticker = ticker;
         getPreviousDay(ticker).then((response) => {
             if (response.data.historical[0].close != undefined){
                 this.setState ({lastClose : response.data.historical[0].close});
@@ -29,7 +30,6 @@ class StockPrice extends React.Component {
     }
 
     updatePrice (ticker){
-        this.state.ticker = ticker;
         let lastClose = this.state.lastClose;
         getPrice(ticker).then((response) => {
             if (response.data.price){
