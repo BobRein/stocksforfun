@@ -61,12 +61,12 @@ class StockPrice extends React.Component {
                         ${this.state.price.toFixed(2)}
                         {this.state.percentChange >= 0 &&
                             <p style = {{color :'green'}}>
-                                +{this.state.percentChange.toFixed(2)}%
+                                (+{this.state.percentChange.toFixed(2)}%)
                             </p>
                         }
                         {this.state.percentChange < 0 &&
                             <p style = {{color :'red'}}>
-                                {this.state.percentChange.toFixed(2)}%
+                                ({this.state.percentChange.toFixed(2)}%)
                             </p>
                         }
                     </div>

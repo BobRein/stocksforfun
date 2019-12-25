@@ -49,11 +49,11 @@ class Lookup extends React.Component {
                 error={this.state.stockError != ''}
                 helperText ={this.state.stockError}
                 onChange ={(e) => this.handleStockChange(e)}/>
-           
-            <div >
-            <StockSnapshot stockInfo = {this.state.stockInfo}></StockSnapshot>
+                    <br></br><br></br>
+                <div >
+                    <StockSnapshot stockInfo = {this.state.stockInfo}></StockSnapshot>
+                </div>
             </div>
-        </div>
         );
     }
 }
