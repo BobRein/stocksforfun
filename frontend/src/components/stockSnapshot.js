@@ -29,23 +29,25 @@ class StockSnapshot extends React.Component {
                     <ExpansionPanel square  >
                     
                       <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />} >
-                      
-                        {/* className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1"> */}
-                    <div className = "row col-xs-12">
-                        <div className="col-xs-6 ">
-                            <div>
-                                <img src = {profile.image} height = "60px"></img>
+                    <div className = "container-fluid">
+                        <div className = "row row-space">
+                            <div className="col-4">
+                                <div className = "row row-space">
+                                    <div className=" col-md-8 col-12">
+                                        <img style= {{ maxWidth: "95%", maxHeight: "50px"}} src = {profile.image} ></img>
+                                    </div>                
+                                    <div className=" col-md-3 offset-md-1 col-12">
+                                        <Typography variant="h5" >{ticker.toUpperCase()}</Typography>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <Typography variant="h4" >{ticker.toUpperCase()}</Typography>
+                            
+                            <div className="col-8 col-md-6 offset-md-2">
+                                <StockPrice ticker = {ticker} style = {{float: "right"}}></StockPrice>
                             </div>
-                        </div>
-                        <div className="col-xs-6">
-                        <StockPrice ticker = {ticker} style = {{float: "right"}}></StockPrice>
                         </div>
                     </div>
-                    
-                    
+      
                     
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails>

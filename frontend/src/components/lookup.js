@@ -46,9 +46,10 @@ class Lookup extends React.Component {
             paddingTop: '40px',
         }
         return (
-            <div style={style} className= "text-center">
+            <div style={style} >
                 <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                 <TextField 
+                className= "text-center"
                 inputProps={{
                     style: {fontSize: 40}
                   }}

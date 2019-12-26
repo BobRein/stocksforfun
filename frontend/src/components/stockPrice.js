@@ -59,26 +59,30 @@ class StockPrice extends React.Component {
         return (
             <div>
                 {(this.state.price != undefined && this.state.percentChange != undefined) && 
-                    <div>
-                        <div>
-                            <Typography variant="h4">
+                <div className= "container-fluid text-center">
+                    <div className="row">
+                        <div className=" col-md-4 offset-md-1 col-12 ">
+                        <Typography variant="h5" style = {{height :"50px"}}>
                                 ${this.state.price.toFixed(2)}
-                            </Typography>
+                        </Typography>
                         </div>
-                        {this.state.percentChange >= 0 &&
-                            <div>
-                                <Typography variant="h4"  style = {{color :'green'}}>
-                                    <ArrowUpwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
-                                </Typography>
-                            </div>
-                        }
-                        {this.state.percentChange < 0 &&
-                            <div>
-                                <Typography variant="h4"  style = {{color :'red'}}>
-                                    <ArrowDownwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
-                                </Typography>
-                            </div>
-                        }
+                        <div className=" col-md-6 offset-md-1 col-12">
+                            {this.state.percentChange >= 0 &&
+                                <div>
+                                    <Typography variant="h5"  style = {{color :'green'}}>
+                                        <ArrowUpwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
+                                    </Typography>
+                                </div>
+                            }
+                            {this.state.percentChange < 0 &&
+                                <div>
+                                    <Typography variant="h5"  style = {{color :'red'}}>
+                                        <ArrowDownwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
+                                    </Typography>
+                                </div>
+                            }
+                        </div>
+                    </div>
                     </div>
                 }
             </div>
