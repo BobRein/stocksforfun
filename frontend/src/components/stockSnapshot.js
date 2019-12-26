@@ -37,7 +37,7 @@ class StockSnapshot extends React.Component {
                                 <img src = {profile.image} height = "60px"></img>
                             </div>
                             <div>
-                                <Typography variant="h2" >{ticker.toUpperCase()}</Typography>
+                                <Typography variant="h4" >{ticker.toUpperCase()}</Typography>
                             </div>
                         </div>
                         <div className="col-xs-6">

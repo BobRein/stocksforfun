@@ -1,6 +1,8 @@
 import {TextField, Typography } from '@material-ui/core';
 import React from 'react';
 import { getPrice, getPreviousDay } from '../axios/stockCalls';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 
 class StockPrice extends React.Component {
@@ -58,16 +60,24 @@ class StockPrice extends React.Component {
             <div>
                 {(this.state.price != undefined && this.state.percentChange != undefined) && 
                     <div>
-                        ${this.state.price.toFixed(2)}
+                        <div>
+                            <Typography variant="h4">
+                                ${this.state.price.toFixed(2)}
+                            </Typography>
+                        </div>
                         {this.state.percentChange >= 0 &&
-                            <p style = {{color :'green'}}>
-                                (+{this.state.percentChange.toFixed(2)}%)
-                            </p>
+                            <div>
+                                <Typography variant="h4"  style = {{color :'green'}}>
+                                    <ArrowUpwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
+                                </Typography>
+                            </div>
                         }
                         {this.state.percentChange < 0 &&
-                            <p style = {{color :'red'}}>
-                                ({this.state.percentChange.toFixed(2)}%)
-                            </p>
+                            <div>
+                                <Typography variant="h4"  style = {{color :'red'}}>
+                                    <ArrowDownwardIcon fontSize = "large" />{(Math.abs(this.state.percentChange)).toFixed(2)}%
+                                </Typography>
+                            </div>
                         }
                     </div>
                 }

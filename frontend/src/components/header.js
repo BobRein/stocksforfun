@@ -1,7 +1,5 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
-import HomeIcon from '@material-ui/icons/Home';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';

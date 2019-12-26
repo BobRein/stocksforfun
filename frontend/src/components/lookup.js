@@ -53,6 +53,7 @@ class Lookup extends React.Component {
                     style: {fontSize: 40}
                   }}
                 value = {this.state.ticker}
+                spellCheck="false"
                 fullWidth = {true}
                 id="standard-basic"
                 error={this.state.stockError != ''}
