@@ -11,12 +11,15 @@ class Lookup extends React.Component {
         super(props);
         this.state = {
             stockError: '',
+            ticker: '',
             stockInfo: {},
             timeout: null
         }
     }
     handleStockChange = (event) => {
         var ticker = event.target.value;
+        ticker = ticker.toUpperCase();
+        this.setState({ ticker: ticker });
         clearTimeout(this.state.timeout);
         if(ticker){
             this.state.timeout = setTimeout(() => {
@@ -40,15 +43,23 @@ class Lookup extends React.Component {
         let style = {
             width: '90%',
             marginLeft: '5%',
+            paddingTop: '40px',
         }
         return (
-            <div style={{width: '100%', padding: '10px'}}>
+            <div style={style} className= "text-center">
+                <div className="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                 <TextField 
+                inputProps={{
+                    style: {fontSize: 40}
+                  }}
+                value = {this.state.ticker}
+                fullWidth = {true}
                 id="standard-basic"
-                label="Ticker Lookup"
                 error={this.state.stockError != ''}
+                placeholder="Search Stocks"
                 helperText ={this.state.stockError}
                 onChange ={(e) => this.handleStockChange(e)}/>
+                </div>
                     <br></br><br></br>
                 <div >
                     <StockSnapshot stockInfo = {this.state.stockInfo}></StockSnapshot>
