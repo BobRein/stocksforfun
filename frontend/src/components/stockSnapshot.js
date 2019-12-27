@@ -28,34 +28,52 @@ class StockSnapshot extends React.Component {
                     <div>
                     <ExpansionPanel square  >
                     
-                      <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />} >
-                    <div className = "container-fluid">
-                        <div className = "row row-space">
-                            <div className="col-4">
+                        <ExpansionPanelSummary  expandIcon={<ExpandMoreIcon />} >
+                            <div className = "container-fluid">
                                 <div className = "row row-space">
-                                    <div className=" col-md-8 col-12">
-                                        <img style= {{ maxWidth: "95%", maxHeight: "50px"}} src = {profile.image} ></img>
-                                    </div>                
-                                    <div className=" col-md-3 offset-md-1 col-12">
-                                        <Typography variant="h5" >{ticker.toUpperCase()}</Typography>
+                                    <div className="col-4">
+                                        <div className = "row row-space">
+                                            <div className="col-md-8 col-12">
+                                                <img style= {{ maxWidth: "95%", maxHeight: "50px"}} src = {profile.image} ></img>
+                                            </div>                
+                                            <div className=" col-md-3 offset-md-1 col-12">
+                                                <Typography variant="h5" >{ticker.toUpperCase()}</Typography>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-8 col-md-6 offset-md-2">
+                                        <StockPrice ticker = {ticker} style = {{float: "right"}}></StockPrice>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div className="col-8 col-md-6 offset-md-2">
-                                <StockPrice ticker = {ticker} style = {{float: "right"}}></StockPrice>
-                            </div>
-                        </div>
-                    </div>
-      
-                    
-                      </ExpansionPanelSummary>
-                      <ExpansionPanelDetails>
-                        <Typography>
-                        {profile.companyName}
-                          
-                        </Typography>
-                      </ExpansionPanelDetails>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            <Typography>
+                                {profile.companyName}
+                            </Typography>
+                            <Typography>
+                                {profile.description}
+                            </Typography>
+                            <Typography>
+                                {profile.mktCap}
+                            </Typography>
+                            <Typography>
+                                {profile.website}
+                            </Typography>
+                            <Typography>
+                                {profile.ceo}
+                            </Typography>
+                            <Typography>
+                                {profile.sector}
+                            </Typography>
+                            <Typography>
+                                {profile.website} 
+                                {/* make this a small button with an icon */}
+                            </Typography>
+
+                            {/*recomendation */}
+
+                        </ExpansionPanelDetails>
                     </ExpansionPanel>
                   </div>
                 }
@@ -65,4 +83,3 @@ class StockSnapshot extends React.Component {
 }
 
 export default StockSnapshot
-
