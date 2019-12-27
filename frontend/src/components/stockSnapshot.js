@@ -9,6 +9,7 @@ import React from 'react';
 import StockPrice from './stockPrice';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 
 
 class StockSnapshot extends React.Component {
@@ -64,20 +65,20 @@ class StockSnapshot extends React.Component {
                                 <div className = "row row-space">
                                     <div className="col-md-4 col-12">
                                         <div className = "row row-space">
-                                            <div className="col-12">
+                                            <div className="col-12" style = {{paddingBottom: "20px"}}>
                                                 <Link href={profile.website} target="_blank" rel="noopener">
                                                     {profile.companyName}
                                                 </Link>
                                             </div>                
                                             <div className="col-6">
-                                                buy
+                                                <Button variant="contained" color="primary" disabled={true} size="medium">BUY</Button>
                                             </div>
                                             <div className="col-6">
-                                                sell
+                                                <Button variant="contained" color="primary" disabled={true} size="medium">SELL</Button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 col-md-6 offset-md-2">
+                                    <div className="col-10 col-md-6 offset-2 text-left">
                                         <Typography>
                                             Market Cap: {this.getMarketCap(profile.mktCap)}
                                         </Typography>
