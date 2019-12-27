@@ -79,15 +79,21 @@ class StockSnapshot extends React.Component {
                                         </div>
                                     </div>
                                     <div className="col-10 col-md-6 offset-2 text-left">
-                                        <Typography>
-                                            Market Cap: {this.getMarketCap(profile.mktCap)}
-                                        </Typography>
-                                        <Typography>
-                                            CEO: {profile.ceo}
-                                        </Typography>
-                                        <Typography>
-                                            Sector: {profile.sector}
-                                        </Typography>
+                                        {profile.mktCap && 
+                                            <Typography>
+                                                Market Cap: {this.getMarketCap(profile.mktCap)}
+                                            </Typography>
+                                        }
+                                        {profile.ceo &&
+                                            <Typography>
+                                                CEO: {profile.ceo}
+                                            </Typography>
+                                        }
+                                        {profile.sector && 
+                                            <Typography>
+                                                Sector: {profile.sector}
+                                            </Typography>
+                                        }
                                     </div>
                                 </div>
                             </div>
