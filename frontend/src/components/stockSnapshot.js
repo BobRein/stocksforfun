@@ -8,13 +8,25 @@ import {TextField,
 import React from 'react';
 import StockPrice from './stockPrice';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Link from '@material-ui/core/Link';
 
 
 class StockSnapshot extends React.Component {
     constructor(props) {
         super(props);
     }
-    
+    getMarketCap (mktCap){
+        let trillion = 1000000000000;
+        let billion = 1000000000;
+        let million = 1000000;
+        if(mktCap > trillion){
+            return (mktCap/trillion).toFixed(2).toString() + " Trillion";
+        }
+        if(mktCap > billion){
+            return (mktCap/billion).toFixed(2).toString() + " Billion";
+        }
+        return (mktCap/million).toFixed(2).toString() + " Million";
+    } 
     render() {
         var profile = undefined;
         var ticker = undefined;
@@ -48,28 +60,43 @@ class StockSnapshot extends React.Component {
                             </div>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
-                            <Typography>
-                                {profile.companyName}
-                            </Typography>
-                            <Typography>
+                        <div className = "container-fluid text-center">
+                                <div className = "row row-space">
+                                    <div className="col-md-4 col-12">
+                                        <div className = "row row-space">
+                                            <div className="col-12">
+                                                <Link href={profile.website} target="_blank" rel="noopener">
+                                                    {profile.companyName}
+                                                </Link>
+                                            </div>                
+                                            <div className="col-6">
+                                                buy
+                                            </div>
+                                            <div className="col-6">
+                                                sell
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12 col-md-6 offset-md-2">
+                                        <Typography>
+                                            Market Cap: {this.getMarketCap(profile.mktCap)}
+                                        </Typography>
+                                        <Typography>
+                                            CEO: {profile.ceo}
+                                        </Typography>
+                                        <Typography>
+                                            Sector: {profile.sector}
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            {/* going to hold off on description for now because of typos */}
+                            {/* <Typography>
                                 {profile.description}
-                            </Typography>
-                            <Typography>
-                                {profile.mktCap}
-                            </Typography>
-                            <Typography>
-                                {profile.website}
-                            </Typography>
-                            <Typography>
-                                {profile.ceo}
-                            </Typography>
-                            <Typography>
-                                {profile.sector}
-                            </Typography>
-                            <Typography>
-                                {profile.website} 
-                                {/* make this a small button with an icon */}
-                            </Typography>
+                            </Typography> */}
+                            
+                           
 
                             {/*recomendation */}
 
