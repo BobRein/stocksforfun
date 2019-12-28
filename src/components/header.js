@@ -41,9 +41,16 @@ import Button from '@material-ui/core/Button';
                                 </Button>
                             </div>
                             <div style={{float: 'right'}}>
-                                <Button component={NavLink} to={"/signup"} title="Create account">                         
+                                <Button component={NavLink} to={"/signup"} title="Create Account">                         
                                     <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
                                         Sign Up  
+                                    </Typography>
+                                </Button>
+                            </div>
+                            <div style={{float: 'right'}}>
+                                <Button component={NavLink} to={"/login"} title="Login">                         
+                                    <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
+                                        Login 
                                     </Typography>
                                 </Button>
                             </div>
