@@ -3,7 +3,7 @@ import Header from './components/header';
 import Home from './pages/home';
 import Research from './pages/research';
 import {Switch, Route} from 'react-router-dom';
-// import Signup from './pages/signup';
+import Signup from './pages/signup';
 import Login from './pages/login';
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Switch>
             <Route path="/research" exact render = {(props) => <Research {...props}/>}/>
             <Route path="/login" exact render = {(props) => <Login {...props}/>}/>
-            {/* <Route path="/signup" exact render = {(props) => <Signup {...props}/>}/> */}
+            <Route path="/signup" exact render = {(props) => <Signup {...props}/>}/>
 
             
             {/* Must BE LAST it matches with all routes */}
