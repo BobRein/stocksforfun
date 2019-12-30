@@ -34,6 +34,7 @@ class StockSnapshot extends React.Component {
     render() {
         var profile = undefined;
         var ticker = undefined;
+        let interval = 30000;//30 seconds
         if (this.props.stockInfo){
             profile = this.props.stockInfo.profile;
             ticker = this.props.stockInfo.symbol;
@@ -58,7 +59,7 @@ class StockSnapshot extends React.Component {
                                         </div>
                                     </div>
                                     <div className="col-8 col-md-6 offset-md-2">
-                                        <StockPrice ticker = {ticker} style = {{float: "right"}}></StockPrice>
+                                        <StockPrice ticker = {ticker} interval = {interval} style = {{float: "right"}}></StockPrice>
                                     </div>
                                 </div>
                             </div>

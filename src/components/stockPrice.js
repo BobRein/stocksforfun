@@ -13,8 +13,26 @@ class StockPrice extends React.Component {
             price: undefined,
             lastClose: undefined,
             percentChange: undefined,
-            ticker: undefined
+            ticker: undefined,
+            interval : null
         };
+    }
+    componentDidMount (){
+        this.updateAll (this.props.ticker);
+        if (this.props.interval && this.props.interval > 10){
+            this.state.interval = setInterval(() => {
+                this.updateAll (this.props.ticker);
+              }, this.props.interval );
+        }
+    }
+    componentWillUnmount() {
+        clearInterval(this.state.interval);
+    }
+    componentDidUpdate (){
+        var ticker = this.props.ticker;
+        if(this.state.ticker == undefined || (ticker && this.state.ticker && this.state.ticker != this.props.ticker)){
+            this.updateAll (ticker);
+        }
     }
     updateAll(ticker){
         this.state.ticker = ticker;
@@ -49,13 +67,6 @@ class StockPrice extends React.Component {
     }
 
     render() {
-        var ticker = this.props.ticker;
-        if(this.state.ticker == undefined || (ticker && this.state.ticker && this.state.ticker != this.props.ticker)){
-            this.updateAll (ticker);
-        }
-        // else if (timer is done){
-        //     //update again
-        // }
         return (
             <div>
                 {(this.state.price != undefined && this.state.percentChange != undefined) && 
