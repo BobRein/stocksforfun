@@ -45,8 +45,8 @@ class Login extends React.Component {
             <div>
                 <br></br>
                 <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1">
-                    <div className ="text-center"><h2>Login</h2></div>
-                    <div className ="text-center text-secondary"><h5>Sign in to your virtual trading account.</h5></div>
+                    <div className ="text-center"><h1>Login</h1></div>
+                    <div className ="text-center text-secondary"><h6>Sign in to your virtual trading account.</h6></div>
                     <br></br>
                     <TextField
                         label = "Username"
@@ -56,7 +56,7 @@ class Login extends React.Component {
                         id="standard-basic"
                         onChange ={(e) => this.handleUsernameChange(e)}
                     />
-                    <br></br>
+                    <br></br><br></br>
                     <TextField
                         type = "password"
                         label = "Password"

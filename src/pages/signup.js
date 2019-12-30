@@ -98,7 +98,7 @@ class Signup extends React.Component {
                 <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1">
                     <div className ="text-center"><h1>Sign Up</h1></div>
                     <div className ="text-center text-secondary"><h6>Create a virtual trading account and begin today.</h6></div>
-                    <br></br><br></br>
+                    <br></br>
                     <TextField
                         label = "Username"
                         value = {this.state.username}
