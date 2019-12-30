@@ -15,6 +15,9 @@ import Button from '@material-ui/core/Button';
 class StockSnapshot extends React.Component {
     constructor(props) {
         super(props);
+        this.state= {
+            signedin : true
+        }
     }
     getMarketCap (mktCap){
         let trillion = 1000000000000;
@@ -66,7 +69,7 @@ class StockSnapshot extends React.Component {
                                     <div className="col-md-4 col-12">
                                         <div className = "row row-space">
                                             <div className="col-10 offset-1">
-                                                <Button variant="contained" fullWidth = {true} color="primary" disabled={true} size="medium">Trade</Button>
+                                                <Button variant="contained" fullWidth = {true} color="primary" disabled={!this.state.signedin} size="medium">Trade</Button>
                                             </div>
                                             <div className="col-12 text-center" style = {{paddingBottom: "20px", paddingTop: "20px"}}>
                                                 <Link href={profile.website} target="_blank" rel="noopener">
