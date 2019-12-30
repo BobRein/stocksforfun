@@ -29,7 +29,7 @@ import Button from '@material-ui/core/Button';
                             <div style={{float: 'left'}}>
                                 <Button component={NavLink} to={"/"} >                         
                                     <Typography variant="body1" style={{ float: 'left',color: 'white'}}>
-                                        Stocks For Fun
+                                        Cool Stocks Game
                                     </Typography>
                                 </Button>
                             </div>
