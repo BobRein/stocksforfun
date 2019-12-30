@@ -62,7 +62,7 @@ class StockPrice extends React.Component {
                 <div className= "container-fluid text-center">
                     <div className="row">
                         <div className=" col-md-4 offset-md-1 col-12 ">
-                        <Typography variant="h5" style = {{height :"50px"}}>
+                        <Typography variant="h5" style = {{height :"55px"}}>
                                 ${this.state.price.toFixed(2)}
                         </Typography>
                         </div>

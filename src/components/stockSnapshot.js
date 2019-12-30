@@ -49,7 +49,7 @@ class StockSnapshot extends React.Component {
                                             <div className="col-md-8 col-12">
                                                 <img style= {{ maxWidth: "95%", maxHeight: "50px"}} src = {profile.image} ></img>
                                             </div>                
-                                            <div className=" col-md-3 offset-md-1 col-12">
+                                            <div className=" col-md-3 offset-md-1 col-12" style = {{ paddingTop: "5px"}}>
                                                 <Typography variant="h5" >{ticker.toUpperCase()}</Typography>
                                             </div>
                                         </div>
@@ -61,21 +61,19 @@ class StockSnapshot extends React.Component {
                             </div>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
-                        <div className = "container-fluid text-center">
+                        <div className = "container-fluid">
                                 <div className = "row row-space">
                                     <div className="col-md-4 col-12">
                                         <div className = "row row-space">
-                                            <div className="col-12" style = {{paddingBottom: "20px"}}>
+                                            <div className="col-10 offset-1">
+                                                <Button variant="contained" fullWidth = {true} color="primary" disabled={true} size="medium">Trade</Button>
+                                            </div>
+                                            <div className="col-12 text-center" style = {{paddingBottom: "20px", paddingTop: "20px"}}>
                                                 <Link href={profile.website} target="_blank" rel="noopener">
                                                     {profile.companyName}
                                                 </Link>
                                             </div>                
-                                            <div className="col-6">
-                                                <Button variant="contained" color="primary" disabled={true} size="medium">BUY</Button>
-                                            </div>
-                                            <div className="col-6">
-                                                <Button variant="contained" color="primary" disabled={true} size="medium">SELL</Button>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div className="col-10 col-md-6 offset-2 text-left">
