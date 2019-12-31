@@ -1,7 +1,6 @@
 import {TextField, Typography } from '@material-ui/core';
 import React from 'react';
 import { getStockInfo } from '../axios/stockCalls.js';
-import Stock from './stock.js';
 import StockSnapshot from './stockSnapshot.js';
 
 
@@ -58,7 +57,7 @@ class Lookup extends React.Component {
                 fullWidth = {true}
                 id="standard-basic"
                 error={this.state.stockError != ''}
-                placeholder="Search Stocks"
+                placeholder="Search Tickers"
                 helperText ={this.state.stockError}
                 onChange ={(e) => this.handleStockChange(e)}/>
                 </div>
