@@ -11,14 +11,19 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 
+import TradingDialog from './tradingDialog';
+
 
 class StockSnapshot extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            signedin : true
+            signedin : true,
+            trading : false
         }
+        this.handleClose = this.handleClose.bind(this)
     }
+   
     getMarketCap (mktCap){
         let trillion = 1000000000000;
         let billion = 1000000000;
@@ -31,6 +36,12 @@ class StockSnapshot extends React.Component {
         }
         return (mktCap/million).toFixed(2).toString() + " Million";
     } 
+    openTradingDialog () {
+        this.setState ({trading: true});
+    }
+    handleClose () {
+        this.setState ({trading: false});
+    }
     render() {
         var profile = undefined;
         var ticker = undefined;
@@ -40,7 +51,7 @@ class StockSnapshot extends React.Component {
             ticker = this.props.stockInfo.symbol;
         }
         return (
-            <div>
+            <div> 
                 {profile && 
                     <div>
                     <ExpansionPanel square  >
@@ -70,7 +81,14 @@ class StockSnapshot extends React.Component {
                                     <div className="col-md-4 col-12">
                                         <div className = "row row-space">
                                             <div className="col-10 offset-1">
-                                                <Button variant="contained" fullWidth = {true} color="primary" disabled={!this.state.signedin} size="medium">Trade</Button>
+                                                <Button 
+                                                variant="contained" 
+                                                fullWidth = {true} 
+                                                color="primary" 
+                                                disabled={!this.state.signedin} 
+                                                size="medium"
+                                                onClick = {() => this.openTradingDialog()}
+                                                >Trade</Button>
                                             </div>
                                             <div className="col-12 text-center" style = {{paddingBottom: "20px", paddingTop: "20px"}}>
                                                 <Link href={profile.website} target="_blank" rel="noopener">
@@ -111,6 +129,7 @@ class StockSnapshot extends React.Component {
 
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
+                    <TradingDialog trading = {this.state.trading} handleClose = {this.handleClose}></TradingDialog>
                   </div>
                 }
             </div>
