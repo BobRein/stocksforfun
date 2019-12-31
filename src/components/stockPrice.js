@@ -21,7 +21,7 @@ class StockPrice extends React.Component {
         this.updateAll (this.props.ticker);
         if (this.props.interval && this.props.interval > 10){
             this.state.interval = setInterval(() => {
-                this.updateAll (this.props.ticker);
+                this.updatePrice (this.props.ticker);
               }, this.props.interval );
         }
     }
@@ -31,7 +31,7 @@ class StockPrice extends React.Component {
     componentDidUpdate (){
         var ticker = this.props.ticker;
         if(this.state.ticker == undefined || (ticker && this.state.ticker && this.state.ticker != this.props.ticker)){
-            this.updateAll (ticker);
+            this.updatePrice(ticker);
         }
     }
     updateAll(ticker){
