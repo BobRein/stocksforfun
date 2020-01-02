@@ -55,7 +55,9 @@ class TradingDialog extends React.Component {
                                 </Tabs>
                             </AppBar>
                             {this.state.currentPanel == this.panelType().Buy &&
-                                <div>Buy some stocks.</div>
+                                <div>Buy some stocks.
+                                {this.props.ticker} {this.props.price}
+                                </div>
                             }
                             {this.state.currentPanel == this.panelType().Sell &&
                                 <div>Sell some stocks.</div>

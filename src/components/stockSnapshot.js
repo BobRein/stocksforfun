@@ -19,9 +19,11 @@ class StockSnapshot extends React.Component {
         super(props);
         this.state= {
             signedin : true,
-            trading : false
+            trading : false,
+            price : 0
         }
-        this.handleClose = this.handleClose.bind(this)
+        this.handleClose = this.handleClose.bind(this);
+        this.setPrice = this.setPrice.bind(this);
     }
    
     getMarketCap (mktCap){
@@ -41,6 +43,9 @@ class StockSnapshot extends React.Component {
     }
     handleClose () {
         this.setState ({trading: false});
+    }
+    setPrice (price) {
+        this.setState ({price: price});
     }
     render() {
         var profile = undefined;
@@ -71,7 +76,11 @@ class StockSnapshot extends React.Component {
                                         </div>
                                     </div>
                                     <div className="col-8 col-md-6 offset-md-2">
-                                        <StockPrice ticker = {ticker} interval = {thirtySeconds} style = {{float: "right"}}></StockPrice>
+                                        <StockPrice 
+                                        ticker = {ticker} 
+                                        interval = {thirtySeconds} 
+                                        setPrice = {this.setPrice}
+                                        style = {{float: "right"}}></StockPrice>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +139,11 @@ class StockSnapshot extends React.Component {
 
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    <TradingDialog trading = {this.state.trading} handleClose = {this.handleClose}></TradingDialog>
+                    <TradingDialog 
+                    trading = {this.state.trading}
+                    handleClose = {this.handleClose}
+                    ticker = {ticker}
+                    price = {this.state.price}></TradingDialog>
                   </div>
                 }
             </div>

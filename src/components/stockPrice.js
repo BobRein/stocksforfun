@@ -30,12 +30,12 @@ class StockPrice extends React.Component {
     }
     componentDidUpdate (){
         var ticker = this.props.ticker;
-        if(this.state.ticker == undefined || (ticker && this.state.ticker && this.state.ticker != this.props.ticker)){
-            this.updatePrice(ticker);
+        if(this.state.ticker == undefined || (ticker && this.state.ticker && this.state.ticker != ticker)){
+            this.updateAll(ticker);
         }
     }
     updateAll(ticker){
-        this.state.ticker = ticker;
+        this.setState ({ticker : ticker});
         getPreviousDay(ticker).then((response) => {
             if (response.data.historical[0].close != undefined){
                 this.setState ({lastClose : response.data.historical[0].close});
@@ -57,12 +57,15 @@ class StockPrice extends React.Component {
                     this.setState({percentChange: (100*(response.data.price - lastClose)/lastClose)});
                 }
                 this.setState ({price : response.data.price});
+                this.props.setPrice((response.data.price).toFixed(2));
             }else{
                 this.setState ({price : undefined});
+                this.props.setPrice(undefined);
             }
         }).catch((error) => {
             console.log('Stock error for ',ticker,' ',error.response);
             this.setState ({price : undefined});
+            this.props.setPrice(undefined);
         });
     }
 
