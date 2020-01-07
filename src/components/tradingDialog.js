@@ -40,8 +40,9 @@ class TradingDialog extends React.Component {
             <div>
                 {this.props.trading != undefined && 
                     <Dialog open={this.props.trading} onClose= { this.props.handleClose} >
-                        <DialogTitle >Trading</DialogTitle>
+                        <DialogTitle >Stock: {this.props.ticker} Price: ${this.props.price}</DialogTitle>
                         <DialogContent>
+                        
                             <AppBar position="static" color="default">
                                 <Tabs
                                     value = {this.state.currentPanel}
@@ -54,10 +55,9 @@ class TradingDialog extends React.Component {
                                     <Tab label="Sell" />
                                 </Tabs>
                             </AppBar>
+                            {/* put check for open stock market here */}
                             {this.state.currentPanel == this.panelType().Buy &&
-                                <div>Buy some stocks.
-                                {this.props.ticker} {this.props.price}
-                                </div>
+                                <div>Buy some stocks.</div>
                             }
                             {this.state.currentPanel == this.panelType().Sell &&
                                 <div>Sell some stocks.</div>

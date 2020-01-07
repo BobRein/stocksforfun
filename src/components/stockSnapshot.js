@@ -20,7 +20,8 @@ class StockSnapshot extends React.Component {
         this.state= {
             signedin : true,
             trading : false,
-            price : 0
+            interval : 20000,
+            price : 1,
         }
         this.handleClose = this.handleClose.bind(this);
         this.setPrice = this.setPrice.bind(this);
@@ -39,7 +40,7 @@ class StockSnapshot extends React.Component {
         return (mktCap/million).toFixed(2).toString() + " Million";
     } 
     openTradingDialog () {
-        this.setState ({trading: true});
+        this.setState ({trading: true});        
     }
     handleClose () {
         this.setState ({trading: false});
@@ -50,8 +51,6 @@ class StockSnapshot extends React.Component {
     render() {
         var profile = undefined;
         var ticker = undefined;
-        let thirtySeconds = 30000;
-        let tenSeconds = 10000;
         if (this.props.stockInfo){
             profile = this.props.stockInfo.profile;
             ticker = this.props.stockInfo.symbol;
@@ -78,7 +77,7 @@ class StockSnapshot extends React.Component {
                                     <div className="col-8 col-md-6 offset-md-2">
                                         <StockPrice 
                                         ticker = {ticker} 
-                                        interval = {thirtySeconds} 
+                                        interval = {this.state.interval} 
                                         setPrice = {this.setPrice}
                                         style = {{float: "right"}}></StockPrice>
                                     </div>
