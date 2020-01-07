@@ -1,0 +1,15 @@
+{
+    "web": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-stocksforfun-web-153301-authRole",
+            "UnauthRoleArn": "arn:aws:iam::679988066915:role/amplify-stocksforfun-web-153301-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::679988066915:role/amplify-stocksforfun-web-153301-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-stocksforfun-web-153301-deployment",
+            "UnauthRoleName": "amplify-stocksforfun-web-153301-unauthRole",
+            "StackName": "amplify-stocksforfun-web-153301",
+            "StackId": "arn:aws:cloudformation:us-east-2:679988066915:stack/amplify-stocksforfun-web-153301/499a2b70-3195-11ea-baba-0abbead6f3aa",
+            "AmplifyAppId": "d1j5xk4b5wamnu"
+        }
+    }
+}
