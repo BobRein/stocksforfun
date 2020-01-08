@@ -1,1 +1,16 @@
-{}
+{
+    "auth": {
+        "CoolStocksGameAuth": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
+        }
+    },
+    "function": {
+        "CoolStocksGameAuthPostConfirmation": {
+            "service": "Lambda",
+            "providerPlugin": "awscloudformation",
+            "build": true
+        }
+    }
+}

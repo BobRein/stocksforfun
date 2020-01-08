@@ -1,0 +1,14 @@
+{
+    "trigger": true,
+    "modules": [
+        "add-to-group"
+    ],
+    "parentResource": "CoolStocksGameAuth",
+    "functionName": "CoolStocksGameAuthPostConfirmation",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerTemplate": "PostConfirmation.json.ejs",
+    "roleName": "CoolStocksGameAuthPostConfirmation",
+    "skipEdit": true,
+    "resourceName": "CoolStocksGameAuthPostConfirmation"
+}

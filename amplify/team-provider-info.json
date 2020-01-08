@@ -10,6 +10,16 @@
             "StackName": "amplify-stocksforfun-web-153301",
             "StackId": "arn:aws:cloudformation:us-east-2:679988066915:stack/amplify-stocksforfun-web-153301/499a2b70-3195-11ea-baba-0abbead6f3aa",
             "AmplifyAppId": "d1j5xk4b5wamnu"
+        },
+        "categories": {
+            "auth": {
+                "CoolStocksGameAuth": {}
+            },
+            "function": {
+                "CoolStocksGameAuthPostConfirmation": {
+                    "GROUP": "StockUsers"
+                }
+            }
         }
     }
 }
