@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button, Paper} from '@material-ui/core';
 import { getStockInfo } from '../axios/stockCalls.js';
+import { Auth } from 'aws-amplify';
 
 
 class Signup extends React.Component {
@@ -9,42 +10,32 @@ class Signup extends React.Component {
         this.state = {
             usernameError: '',
             username: '',
-            usernameSubmitable: false,
+            usernameTaken: false,
             usernameTimeout: null,
             password: '',
             passwordError:'',
             secondPassword:'',
-            secondPasswordError:'',
-            secondPasswordSubmittable: false,
-            secondPasswordTimeout : null
+            secondPasswordError:''
         }
     }
-
-    handleUsernameChange = (event) => {
-        var username = event.target.value;
-        username = username.toLowerCase();
-        this.setState({ username: username });//probably add checks to make it only alpha numeric
+    checkUsername (username) {
         clearTimeout(this.state.usernameTimeout);
         if(username){
-            getStockInfo(username).then((response) => { // using this api temporarily
-                if (response.data.symbol == undefined){
-                    this.setState({ usernameError: '' });
-                    this.setState({usernameSubmitable: true});
-                }else{
-                    this.setState({usernameSubmitable : false})
-                    this.state.usernameTimeout = setTimeout(() => {
-                        if(username == this.state.username){
-                            this.setState({ usernameError: username + ' is taken by another user.' });
-                        }
-                    }, 750);
-                }
-            }).catch((error) => {
-                this.setState({ usernameError: 'Server issue, sorry for the inconvience.' })
-            });
-        }else{
-            console.log('test');
-            this.setState({ usernameError: '' });
+            this.state.usernameTimeout = setTimeout(() => {
+                getStockInfo(username).then((response) => { // using this api temporarily
+                    let exists = (response.data.symbol != undefined);
+                    this.setState({ usernameTaken: exists});
+                }).catch((error) => {
+                    this.setState({ usernameError: 'Server issue, sorry for the inconvience.' });
+                });
+            }, 500);
         }
+    }
+    handleUsernameChange = (event) => {
+        var username = event.target.value;
+        this.setState({ username: username });//probably add checks to make it only alpha numeric   
+        this.setState ({usernameError : ''}); 
+        this.checkUsername(username);    
     }
     handlePasswordChange = (event) => {
         this.setState ({passwordError : ''})
@@ -53,41 +44,29 @@ class Signup extends React.Component {
             this.handleSecondPasswordChange (this.state.secondPassword);
         });//call back because aysnch 
     }
-    
     handleSecondPasswordChange = (password) => {
+        this.setState ({secondPasswordError : ''});
         this.setState({ secondPassword: password });
-        clearTimeout(this.state.secondPasswordTimeout);
-        if (this.state.password && password){
-            if (password == this.state.password){
-                this.setState ({secondPasswordSubmittable: true});
-                this.setState ({secondPasswordError : ''});
-            }else{
-                this.setState ({secondPasswordSubmittable: false});
-                this.state.secondPasswordTimeout = setTimeout(() => {
-                    this.setState ({secondPasswordError : 'Passwords must match.'});
-                }, 750);
-            }
-        }else{
-            this.setState ({secondPasswordSubmittable: true});
-            this.setState ({secondPasswordError : ''});
-        }
     }
     handleSubmit = () =>{
-        if (this.state.password != 'bad'){
-            console.log ('username : ', this.state.username, ' password : ', this.state.password);
+        if (this.state.usernameTaken){
+            this.setState({ usernameError: 'Username is taken by another user.' });
+        }else if(this.state.password.length < 6){
+            this.setState({passwordError: '6 Character Minimum'});
+        }else if (this.state.password != this.state.secondPassword){
+            this.setState({secondPasswordError: 'Passwords must match'});
         }else{
-            this.setState({passwordError: 'Invalid Password'});
+            console.log ('Success username : ', this.state.username, ' password : ', this.state.password);
         }
     }
     isSubmitable = () => {
         let state = this.state;
         return (state.username
              && state.usernameError === ''
-             && state.usernameSubmitable
              && state.password 
              && state.secondPassword 
              && state.secondPasswordError ===''
-             && state.secondPasswordSubmittable
+             && state.password.length == state.secondPassword.length
              )
     }
 
