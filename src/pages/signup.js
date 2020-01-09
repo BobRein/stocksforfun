@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Paper} from '@material-ui/core';
+import { TextField, Button, Paper, Typography} from '@material-ui/core';
 import { getStockInfo } from '../axios/stockCalls.js';
 import { Auth } from 'aws-amplify';
 
@@ -15,7 +15,10 @@ class Signup extends React.Component {
             password: '',
             passwordError:'',
             secondPassword:'',
-            secondPasswordError:''
+            secondPasswordError:'',
+            submitted: false,
+            code: '',
+            codeError: ''
         }
     }
     checkUsername (username) {
@@ -57,6 +60,7 @@ class Signup extends React.Component {
             this.setState({secondPasswordError: 'Passwords must match'});
         }else{
             console.log ('Success username : ', this.state.username, ' password : ', this.state.password);
+            this.setState({submitted: true});
         }
     }
     isSubmitable = () => {
@@ -69,64 +73,115 @@ class Signup extends React.Component {
              && state.password.length == state.secondPassword.length
              )
     }
+    confirmationIsSubmitable = () => {
+        return (this.state.code);
+    }
+    confirmationHandleSubmit = () =>{
+        console.log('redirect worked');
+    }
+    handleCodeChange = (event) => {
+        var code = event.target.value;
+        this.setState({ code: code }); 
+    }
 
     render() { 
-        return(
-            <div>
-                <br></br>
-                <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1">
-                    <div className ="text-center"><h1>Sign Up</h1></div>
-                    <div className ="text-center text-secondary"><h6>Create a virtual trading account and begin today.</h6></div>
+        if (this.state.submitted){
+            return(
+                <div>
                     <br></br>
-                    <TextField
-                        label = "Username"
-                        value = {this.state.username}
-                        spellCheck="false"
-                        fullWidth = {true}
-                        id="standard-basic"
-                        error={this.state.usernameError != ''}
-                        helperText ={this.state.usernameError}
-                        onChange ={(e) => this.handleUsernameChange(e)}
-                    />
-                    <br></br><br></br>
-                    <TextField
-                        type = "password"
-                        label = "Password"
-                        value = {this.state.password}
-                        spellCheck="false"
-                        fullWidth = {true}
-                        id="standard-basic"
-                        error={this.state.passwordError != ''}
-                        helperText ={this.state.passwordError}
-                        onChange ={(e) => this.handlePasswordChange(e)}
-                    />
-                    <br></br><br></br>
-                    <TextField
-                        type = "password"
-                        label = "Confirm Password"
-                        value = {this.state.secondPassword}
-                        spellCheck="false"
-                        fullWidth = {true}
-                        id="standard-basic"
-                        error={this.state.secondPasswordError != ''}
-                        helperText ={this.state.secondPasswordError}
-                        onChange ={(e) => this.handleSecondPasswordChange(e.target.value)}
-                    />
-                    <br></br><br></br>
-                    <div className="text-center">
-                        <Button 
-                            variant="contained"
-                            color="primary"
-                            disabled={!this.isSubmitable()}
-                            size="medium"
-                            onClick={ () => this.handleSubmit() }
-                        >
-                            Login
-                        </Button>
+                    <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1">
+                        <div className ="text-center"><h1>Email Confirmation</h1></div>
+                        <div className ="text-center text-secondary"><h6>Copy the code from your email into the field below.</h6></div>
+                        <br></br>
+                        <div className='text-center'>
+                            <Typography variant="h5"  color="primary">
+                                Welcome, test
+                            </Typography>
+                        </div>
+                        <br></br>
+                        <TextField
+                            label = "Confirmation Code"
+                            value = {this.state.code}
+                            spellCheck="false"
+                            fullWidth = {true}
+                            id="standard-basic"
+                            error={this.state.codeError != ''}
+                            helperText ={this.state.codeError}
+                            onChange ={(e) => this.handleCodeChange(e)}
+                        />
+                        <br></br><br></br>
+                        <div className="text-center">
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                disabled={!this.confirmationIsSubmitable()}
+                                size="medium"
+                                onClick={ () => this.confirmationHandleSubmit() }
+                            >
+                                Confirm
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }else{
+            return(
+                <div>
+                    <br></br>
+                    <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-10 offset-1">
+                        <div className ="text-center"><h1>Sign Up</h1></div>
+                        <div className ="text-center text-secondary"><h6>Create a virtual trading account and begin today.</h6></div>
+                        <br></br>
+                        <TextField
+                            label = "Username"
+                            value = {this.state.username}
+                            spellCheck="false"
+                            fullWidth = {true}
+                            id="standard-basic"
+                            error={this.state.usernameError != ''}
+                            helperText ={this.state.usernameError}
+                            onChange ={(e) => this.handleUsernameChange(e)}
+                        />
+                        <br></br><br></br>
+                        <TextField
+                            type = "password"
+                            label = "Password"
+                            value = {this.state.password}
+                            spellCheck="false"
+                            fullWidth = {true}
+                            id="standard-basic"
+                            error={this.state.passwordError != ''}
+                            helperText ={this.state.passwordError}
+                            onChange ={(e) => this.handlePasswordChange(e)}
+                        />
+                        <br></br><br></br>
+                        <TextField
+                            type = "password"
+                            label = "Confirm Password"
+                            value = {this.state.secondPassword}
+                            spellCheck="false"
+                            fullWidth = {true}
+                            id="standard-basic"
+                            error={this.state.secondPasswordError != ''}
+                            helperText ={this.state.secondPasswordError}
+                            onChange ={(e) => this.handleSecondPasswordChange(e.target.value)}
+                        />
+                        <br></br><br></br>
+                        <div className="text-center">
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                disabled={!this.isSubmitable()}
+                                size="medium"
+                                onClick={ () => this.handleSubmit() }
+                            >
+                                Sign Up
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 
