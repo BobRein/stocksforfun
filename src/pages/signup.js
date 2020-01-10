@@ -12,38 +12,22 @@ class Signup extends React.Component {
         this.state = {
             email: '',
             emailError: '',
-            usernameError: '',
             username: '',
-            usernameTaken: false,
-            usernameTimeout: null,
+            usernameError: '',
             password: '',
             passwordError:'',
             secondPassword:'',
             secondPasswordError:'',
-            submitted: false,
             code: '',
             codeError: '',
+            submitted: false,
             confirmed: false
-        }
-    }
-    checkUsername (username) {
-        clearTimeout(this.state.usernameTimeout);
-        if(username){
-            this.state.usernameTimeout = setTimeout(() => {
-                getStockInfo(username).then((response) => { // using this api temporarily
-                    let exists = (response.data.symbol != undefined);
-                    this.setState({ usernameTaken: exists});
-                }).catch((error) => {
-                    this.setState({ usernameError: 'Server issue, sorry for the inconvience.' });
-                });
-            }, 500);
         }
     }
     handleUsernameChange = (event) => {
         var username = event.target.value;
         this.setState({ username: username });  
-        this.setState ({usernameError : ''}); 
-        this.checkUsername(username);    
+        this.setState ({usernameError : ''});   
     }
     handleEmailChange = (event) =>{
         var email = event.target.value;
@@ -62,15 +46,7 @@ class Signup extends React.Component {
         this.setState({ secondPassword: password });
     }
     handleSubmit = () =>{
-        let usernameIsInvalid =false;
-        let emailIsInvalid = false;
-        if (this.state.usernameTaken){
-            this.setState({ usernameError: 'Username is taken by another user.' });
-        }else if(usernameIsInvalid){
-            this.setState({usernameError: 'Only letters and numbers allowed in username.'});
-        }else if(emailIsInvalid){
-            this.setState({emailError: 'Invalid Email'});
-        }else if(this.state.password.length < 6){
+        if(this.state.password.length < 6){
             this.setState({passwordError: '6 Character Minimum'});
         }else if (this.state.password != this.state.secondPassword){
             this.setState({secondPasswordError: 'Passwords must match'});
@@ -91,7 +67,18 @@ class Signup extends React.Component {
             console.log('Successfully signed up');
             this.setState({submitted: true});
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            console.log(err);
+            var message = '';
+            if (err.message){
+               message = err.message;
+            }
+            if(message.includes ('exists')){
+                this.setState({ usernameError: message });
+            }else if(message.includes ('email')){
+                this.setState({ emailError: message });
+            }
+        })
     }
     isSubmitable = () => {
         let state = this.state;
