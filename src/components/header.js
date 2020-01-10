@@ -54,6 +54,13 @@ import Button from '@material-ui/core/Button';
                                     </Typography>
                                 </Button>
                             </div>
+                            <div style={{float: 'right'}}>
+                                <Button component={NavLink} to={"/dashboard"} title="Dashboard">                         
+                                    <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
+                                        Dashboard 
+                                    </Typography>
+                                </Button>
+                            </div>
                         </div>
                     </Toolbar>
                 </AppBar>
