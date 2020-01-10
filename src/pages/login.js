@@ -49,6 +49,7 @@ class Login extends React.Component {
     }
     render() { 
       if (this.state.signedin) {
+        this.props.resetUser();
         return (<Redirect to='/dashboard' />)
       } else {
         return(

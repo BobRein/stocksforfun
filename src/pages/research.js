@@ -1,5 +1,6 @@
 import React from 'react';
 import Lookup from '../components/lookup';
+
 // import Amplify from 'aws-amplify';
 // import aws_exports from '../aws-exports';
 // import {withAuthenticator} from  'aws-amplify-react';
@@ -15,7 +16,7 @@ class Research extends React.Component {
 
     render() { 
                     // <img src = "https://www.broadcastingcable.com/.image/t_share/MTY1OTg5NzY2ODI1NzgxMTk1/stock-market-getty-images-rf.jpg" width="100%"></img>
-
+                    
         return(
             <div>
                <Lookup></Lookup>

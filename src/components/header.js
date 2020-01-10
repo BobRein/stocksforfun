@@ -3,15 +3,26 @@ import SearchIcon from '@material-ui/icons/Search';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-
+import { Auth } from 'aws-amplify';
 
  class Header extends React.Component {
     constructor(props) {
         super(props);
- 
+
     }
-    
+
+    logout  () {
+        console.log('logging out');
+        Auth.signOut()
+            .then(data => {
+                console.log(data);
+                this.props.resetUser();
+            })
+            .catch(err => console.log(err));
+    }
+        
     render() {
+        var user = this.props.user;
         const style = theme => ({
             root: {
               "&:hover": {
@@ -40,6 +51,7 @@ import Button from '@material-ui/core/Button';
                                     </Typography>
                                 </Button>
                             </div>
+                            {user == null &&
                             <div style={{float: 'right'}}>
                                 <Button component={NavLink} to={"/signup"} title="Create Account">                         
                                     <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
@@ -47,6 +59,8 @@ import Button from '@material-ui/core/Button';
                                     </Typography>
                                 </Button>
                             </div>
+                            }
+                            {user == null &&   
                             <div style={{float: 'right'}}>
                                 <Button component={NavLink} to={"/login"} title="Login">                         
                                     <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
@@ -54,6 +68,8 @@ import Button from '@material-ui/core/Button';
                                     </Typography>
                                 </Button>
                             </div>
+                            }
+                            {user  && 
                             <div style={{float: 'right'}}>
                                 <Button component={NavLink} to={"/dashboard"} title="Dashboard">                         
                                     <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
@@ -61,6 +77,22 @@ import Button from '@material-ui/core/Button';
                                     </Typography>
                                 </Button>
                             </div>
+                            }
+                         
+                            {user  && 
+                            <div style={{float: 'right'}}>
+                                <Button onClick = {() => this.logout()}title="Logout">                         
+                                    <Typography variant="body1" style={{ float: 'right',color: 'white'}}>
+                                        Logout 
+                                    </Typography>
+                                </Button>
+                            </div>
+                            }   
+                            {user  &&                     
+                                <Typography variant="body1" style={{ color: 'white'}} className='text-center'>
+                                    {user.username} 
+                                </Typography>
+                            }
                         </div>
                     </Toolbar>
                 </AppBar>
