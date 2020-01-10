@@ -1,7 +1,8 @@
 import React from 'react';
 import { TextField, Button, Paper} from '@material-ui/core';
 import { getStockInfo } from '../axios/stockCalls.js';
-
+import { Auth } from 'aws-amplify';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
     constructor(props) {
@@ -10,18 +11,14 @@ class Login extends React.Component {
             username: '',
             password: '',
             passwordError: '',
-            
+            signedin: false
         }
     }
 
-    componentDidMount() {  
-
-    }
     handleUsernameChange = (event) => {
         var username = event.target.value;
         username = username.toLowerCase();
-        this.setState({ username: username });//probably add checks to make it only alpha numeric
-      
+        this.setState({ username: username });
     }
     
     handlePasswordChange = (event) => {
@@ -29,18 +26,31 @@ class Login extends React.Component {
         this.setState({ password: password });
         this.setState({passwordError: ''});
     }
-    handleSubmit = () =>{
-        if (this.state.password != 'bad'){
-            console.log ('username : ', this.state.username, ' password : ', this.state.password);
-        }else{
-            this.setState({passwordError: 'Invalid Password'});
-        }
+    signIn() {
+        const { username, password } = this.state;  
+        Auth.signIn({
+            username: username,
+            password: password
+        })
+        .then(() => this.setState({signedin: true}))
+        .catch((err) => this.setState({passwordError: 'Invalid Password'}))
     }
+  
+    // confirmSignIn() {
+    //     const { username } = this.state;
+    //     Auth.confirmSignIn(username)
+    //     .then(() => this.setState({signedIn: true}))
+    //     .catch((err) => console.log(`Error confirming sign up - ${ err }`))
+    // }
+ 
     isSubmitable = () => {
         let state = this.state;
         return (state.username && state.password && state.passwordError === '')
     }
     render() { 
+      if (this.state.signedin) {
+        return (<Redirect to='/research' />)
+      } else {
         return(
             <div>
                 <br></br>
@@ -75,7 +85,7 @@ class Login extends React.Component {
                             color="primary"
                             disabled={!(this.isSubmitable())}
                             size="medium"
-                            onClick={ () => this.handleSubmit() }
+                            onClick={ () => this.signIn() }
                         >
                             Login
                         </Button>
@@ -83,6 +93,8 @@ class Login extends React.Component {
                 </div>
             </div>
         );
+      }
+        
     }
 }
 
