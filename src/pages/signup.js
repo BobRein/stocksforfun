@@ -2,12 +2,16 @@ import React from 'react';
 import { TextField, Button, Paper, Typography} from '@material-ui/core';
 import { getStockInfo } from '../axios/stockCalls.js';
 import { Auth } from 'aws-amplify';
+import { Redirect } from 'react-router-dom'
+
 
 
 class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: '',
+            emailError: '',
             usernameError: '',
             username: '',
             usernameTaken: false,
@@ -18,7 +22,8 @@ class Signup extends React.Component {
             secondPasswordError:'',
             submitted: false,
             code: '',
-            codeError: ''
+            codeError: '',
+            confirmed: false
         }
     }
     checkUsername (username) {
@@ -36,9 +41,14 @@ class Signup extends React.Component {
     }
     handleUsernameChange = (event) => {
         var username = event.target.value;
-        this.setState({ username: username });//probably add checks to make it only alpha numeric   
+        this.setState({ username: username });  
         this.setState ({usernameError : ''}); 
         this.checkUsername(username);    
+    }
+    handleEmailChange = (event) =>{
+        var email = event.target.value;
+        this.setState({ email: email });
+        this.setState ({emailError : ''}); 
     }
     handlePasswordChange = (event) => {
         this.setState ({passwordError : ''})
@@ -52,16 +62,36 @@ class Signup extends React.Component {
         this.setState({ secondPassword: password });
     }
     handleSubmit = () =>{
+        let usernameIsInvalid =false;
+        let emailIsInvalid = false;
         if (this.state.usernameTaken){
             this.setState({ usernameError: 'Username is taken by another user.' });
+        }else if(usernameIsInvalid){
+            this.setState({usernameError: 'Only letters and numbers allowed in username.'});
+        }else if(emailIsInvalid){
+            this.setState({emailError: 'Invalid Email'});
         }else if(this.state.password.length < 6){
             this.setState({passwordError: '6 Character Minimum'});
         }else if (this.state.password != this.state.secondPassword){
             this.setState({secondPasswordError: 'Passwords must match'});
         }else{
-            console.log ('Success username : ', this.state.username, ' password : ', this.state.password);
-            this.setState({submitted: true});
+            this.signUp();
         }
+    }
+    signUp() {
+        const { username, password, email } = this.state; 
+        Auth.signUp({
+            username: username,
+            password: password,
+            attributes: {
+                email: email
+            }
+        })
+        .then(() => {
+            console.log('Successfully signed up');
+            this.setState({submitted: true});
+        })
+        .catch((err) => console.log(err))
     }
     isSubmitable = () => {
         let state = this.state;
@@ -76,16 +106,29 @@ class Signup extends React.Component {
     confirmationIsSubmitable = () => {
         return (this.state.code);
     }
-    confirmationHandleSubmit = () =>{
-        console.log('redirect worked');
+    confirmSignUp() {
+        const { username, code } = this.state;
+        Auth.confirmSignUp(username, code)
+        .then(() => {
+            console.log('Successfully confirmed signed up');
+            this.setState({confirmed: true});
+            //this.props.handleSignup(); //maybe do this later
+        })
+        .catch((err) => {
+            console.log('Confirmation code was incorrect.');
+            this.setState({codeError: 'Confirmation code is incorrect.'});
+        })
     }
     handleCodeChange = (event) => {
         var code = event.target.value;
         this.setState({ code: code }); 
+        this.setState({codeError: ''});
     }
 
     render() { 
-        if (this.state.submitted){
+        if(this.state.confirmed){
+            return (<Redirect to='/login' />)
+        }else if (this.state.submitted){
             return(
                 <div>
                     <br></br>
@@ -95,7 +138,7 @@ class Signup extends React.Component {
                         <br></br>
                         <div className='text-center'>
                             <Typography variant="h5"  color="primary">
-                                Welcome, test
+                                Welcome, {this.state.username}
                             </Typography>
                         </div>
                         <br></br>
@@ -116,7 +159,7 @@ class Signup extends React.Component {
                                 color="primary"
                                 disabled={!this.confirmationIsSubmitable()}
                                 size="medium"
-                                onClick={ () => this.confirmationHandleSubmit() }
+                                onClick={ () => this.confirmSignUp() }
                             >
                                 Confirm
                             </Button>
@@ -141,6 +184,17 @@ class Signup extends React.Component {
                             error={this.state.usernameError != ''}
                             helperText ={this.state.usernameError}
                             onChange ={(e) => this.handleUsernameChange(e)}
+                        />
+                        <br></br><br></br>
+                        <TextField
+                            label = "Email"
+                            value = {this.state.email}
+                            spellCheck="false"
+                            fullWidth = {true}
+                            id="standard-basic"
+                            error={this.state.emailError != ''}
+                            helperText ={this.state.emailError}
+                            onChange ={(e) => this.handleEmailChange(e)}
                         />
                         <br></br><br></br>
                         <TextField
