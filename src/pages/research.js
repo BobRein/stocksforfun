@@ -19,7 +19,7 @@ class Research extends React.Component {
                     
         return(
             <div>
-               <Lookup></Lookup>
+               <Lookup user= {this.props.user}></Lookup>
             </div>
         );
     }

@@ -63,7 +63,7 @@ class Lookup extends React.Component {
                 </div>
                     <br></br><br></br>
                 <div >
-                    <StockSnapshot stockInfo = {this.state.stockInfo}></StockSnapshot>
+                    <StockSnapshot user= {this.props.user} stockInfo = {this.state.stockInfo}></StockSnapshot>
                 </div>
             </div>
         );

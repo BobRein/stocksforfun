@@ -33,6 +33,9 @@ class Dashboard extends React.Component {
                         </div>
                         <div className="col-md-5 offset-md-2 col-12 ">
                             <div className ="text-center"><h4>Portfolio Value:</h4></div>
+                        </div> 
+                        <div className="col-12">
+                            <div className ="text-center"><h4>Holdings</h4></div>
                         </div>                                       
                     </div>
                 </div>

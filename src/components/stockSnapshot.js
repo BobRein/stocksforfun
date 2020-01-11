@@ -18,7 +18,6 @@ class StockSnapshot extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
-            signedin : true,
             trading : false,
             interval : 20000,
             price : 1,
@@ -49,6 +48,7 @@ class StockSnapshot extends React.Component {
         this.setState ({price: price});
     }
     render() {
+        let user = this.props.user;
         var profile = undefined;
         var ticker = undefined;
         if (this.props.stockInfo){
@@ -94,7 +94,7 @@ class StockSnapshot extends React.Component {
                                                 variant="contained" 
                                                 fullWidth = {true} 
                                                 color="primary" 
-                                                disabled={!this.state.signedin} 
+                                                disabled={!user} 
                                                 size="medium"
                                                 onClick = {() => this.openTradingDialog()}
                                                 >Trade</Button>
