@@ -113,7 +113,9 @@ class Signup extends React.Component {
     }
 
     render() { 
-        if(this.state.confirmed){
+        if (this.props.user) {
+            return (<Redirect to='/dashboard' />)
+        }else if(this.state.confirmed){
             return (<Redirect to='/login' />)
         }else if (this.state.submitted){
             return(

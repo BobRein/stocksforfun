@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, Button, Paper} from '@material-ui/core';
-import { getStockInfo } from '../axios/stockCalls.js';
 import { Auth } from 'aws-amplify';
 import { Redirect } from 'react-router-dom';
 
@@ -48,7 +47,8 @@ class Login extends React.Component {
         return (state.username && state.password && state.passwordError === '')
     }
     render() { 
-      if (this.state.signedin) {
+      
+      if (this.state.signedin || this.props.user) {
         this.props.resetUser();
         return (<Redirect to='/dashboard' />)
       } else {

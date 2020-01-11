@@ -18,7 +18,7 @@ class Container extends React.Component {
     componentDidMount () {
         this.resetUser();
     }
-    resetUser () {
+    resetUser () {//add database calls here to update other attributes like cash and portfolio value
         Auth.currentAuthenticatedUser()
         .then(user => {
             if (user != this.state.user){
@@ -39,14 +39,14 @@ class Container extends React.Component {
                 <Header user = {this.state.user} resetUser = {this.resetUser} />
                 <div style={{paddingTop: '60px'}}>
                 <Switch>
-                    <Route path="/research" exact render = {(props) => <Research {...props}/>}/>
-                    <Route path="/login" exact render = {(props) => <Login {...props} resetUser = {this.resetUser}/>}/>
-                    <Route path="/signup" exact render = {(props) => <Signup {...props}/>}/>
-                    <Route path="/dashboard" exact render = {(props) => <Dashboard {...props}/>}/>
+                    <Route path="/research" exact render = {(props) => <Research {...props} user = {this.state.user}/>}/>
+                    <Route path="/login" exact render = {(props) => <Login {...props} user = {this.state.user} resetUser = {this.resetUser}/>}/>
+                    <Route path="/signup" exact render = {(props) => <Signup {...props} user = {this.state.user}/>}/>
+                    <Route path="/dashboard" exact render = {(props) => <Dashboard {...props} user = {this.state.user}/>}/>
 
                     
                     {/* Must BE LAST it matches with all routes */}
-                    <Route path="/" exact render = {(props) => <Home {...props}/>}/>
+                    <Route path="/" exact render = {(props) => <Home {...props} user = {this.state.user}/>}/>
                 </Switch>
                 </div>
             </div>
