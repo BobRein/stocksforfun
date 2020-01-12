@@ -60,14 +60,14 @@ class TradingDialog extends React.Component {
                                 </Tabs>
                             </AppBar>
                             {/* put check for open stock market here */}
-                            {this.state.currentPanel == this.panelType().Buy &&
+                            {this.state.currentPanel == this.panelType().Buy && this.props.user &&
                                 <div><Buy 
                                 price= {this.props.price} 
                                 username = {this.props.user.username} 
                                 ticker = {this.props.ticker}
                                 ></Buy></div>
                             }
-                            {this.state.currentPanel == this.panelType().Sell &&
+                            {this.state.currentPanel == this.panelType().Sell && this.props.user &&
                                 <div><Sell 
                                 price= {this.props.price} 
                                 username = {this.props.user.username} 

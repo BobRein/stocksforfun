@@ -48,7 +48,7 @@ class Sell extends React.Component {
             <div className = "text-center">
                 <br></br>
                 <br></br>
-                <h6>Current Holdings: $ {currentHoldings}</h6>
+                <h6>Current Holdings:  {currentHoldings} shares</h6>
                 <br></br>
                 <TextField
                 label = "Number of Shares"
