@@ -2,7 +2,7 @@ import {TextField, Typography, Button } from '@material-ui/core';
 import React from 'react';
 
 
-class TradingDialog extends React.Component {
+class Buy extends React.Component {
     
     constructor(props) {
         super(props);
@@ -78,4 +78,4 @@ class TradingDialog extends React.Component {
 
 
 
-export default TradingDialog
+export default Buy
