@@ -12,6 +12,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import Buy from "./buy.js"
 
 
 class TradingDialog extends React.Component {
@@ -57,7 +58,11 @@ class TradingDialog extends React.Component {
                             </AppBar>
                             {/* put check for open stock market here */}
                             {this.state.currentPanel == this.panelType().Buy &&
-                                <div>Buy some stocks.</div>
+                                <div><Buy 
+                                price= {this.props.price} 
+                                username = {this.props.user.username} 
+                                ticker = {this.props.ticker}
+                                ></Buy></div>
                             }
                             {this.state.currentPanel == this.panelType().Sell &&
                                 <div>Sell some stocks.</div>

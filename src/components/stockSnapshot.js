@@ -142,7 +142,8 @@ class StockSnapshot extends React.Component {
                     trading = {this.state.trading}
                     handleClose = {this.handleClose}
                     ticker = {ticker}
-                    price = {this.state.price}></TradingDialog>
+                    price = {this.state.price}
+                    user = {this.props.user}></TradingDialog>
                   </div>
                 }
             </div>

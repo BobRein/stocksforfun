@@ -16,7 +16,6 @@ class Login extends React.Component {
 
     handleUsernameChange = (event) => {
         var username = event.target.value;
-        username = username.toLowerCase();
         this.setState({ username: username });
     }
     
