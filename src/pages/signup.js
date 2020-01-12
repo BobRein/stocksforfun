@@ -3,6 +3,7 @@ import { TextField, Button, Paper, Typography} from '@material-ui/core';
 import { getStockInfo } from '../axios/stockCalls.js';
 import { Auth } from 'aws-amplify';
 import { Redirect } from 'react-router-dom'
+import { createNewUser } from '../axios/backendCalls.js';
 
 
 
@@ -98,6 +99,13 @@ class Signup extends React.Component {
         Auth.confirmSignUp(username, code)
         .then(() => {
             console.log('Successfully confirmed signed up');
+
+            createNewUser(username).then((response) => {
+                console.log('User Created');
+            }).catch((error) => {
+                console.log('Could not create user in database.');
+            });
+            
             this.setState({confirmed: true});
             //this.props.handleSignup(); //maybe do this later
         })
