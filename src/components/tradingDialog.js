@@ -39,12 +39,14 @@ class TradingDialog extends React.Component {
     
     render() {
         return (
-            <div>
+            <div >
                 {this.props.trading != undefined && 
                     <Dialog open={this.props.trading} onClose= { this.props.handleClose} >
-                        <DialogTitle >Stock: {this.props.ticker} Price: ${this.props.price}</DialogTitle>
+                        <DialogTitle className = "text-center">Stock: {this.props.ticker} </DialogTitle>
+
                         <DialogContent>
-                        
+                            <h4 className = "text-center">Price: ${this.props.price}</h4>
+                            <br></br>
                             <AppBar position="static" color="default">
                                 <Tabs
                                     value = {this.state.currentPanel}
